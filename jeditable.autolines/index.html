@@ -1,0 +1,113 @@
+
+<html>
+<head>
+<script type="text/javascript" src='http://code.jquery.com/jquery-1.7.2.min.js'></script>
+<script type="text/javascript" src='http://www.appelsiini.net/download/jquery.jeditable.js'></script>
+<script type="text/javascript" src='jquery.jeditable.autolines.js'></script>
+
+<script type="text/javascript">
+ $(document).ready(function() {
+	 $('.click').editable(function(value, settings) { 
+	     console.log(this);
+	     console.log(value);
+	     console.log(settings);
+	     return(value);
+	  }, { 
+	     tooltip : 'Click to edit...',
+	     style   : 'inherit'
+	 });
+
+	 $('.editable').editable(function(value, settings) { 
+	     console.log(this);
+	     console.log(value);
+	     console.log(settings);
+	     return value;
+	  }, { 
+	     type    : 'autolines',
+	     rows    : 3,
+	     cols    : 80,
+	     submit  : 'OK',
+	     tooltip : 'Click to edit...',
+	     onblur: 'ignore'
+	 });
+ });
+
+</script>
+<style type="text/css">
+
+.title {
+  //float:left;
+}
+
+.editable {
+ // float: left;
+}
+
+//force overwrite
+//#edit-box1 textarea[style] {
+//height: 30px !important;
+//width: 100px !important;
+//}
+
+.editable textarea {
+background-color: #E0FFFF;
+}
+
+.click textarea {
+background-color: #FFFACD;
+}
+
+.clear {
+  clear:both;
+}
+.footer {
+  margin-top: 20px;
+  border-top: 2px dotted gray;
+}
+
+.status-panel{
+  margin-top: 10px;
+}
+
+.edit-box {
+  border: 1px solid red;
+  margin-bottom: 10px;
+  background-color: #FFFFE0;
+}
+
+.edit-box-inner {
+  padding: 10px;
+}
+
+form {
+margin: 0;
+display: inline;
+}
+
+.editable button {
+  margin-top: 1px;
+}
+
+</style>
+</head>
+<body>
+<div></div>
+<div class='status-panel'>
+
+<div class='edit-box'>
+<div class='edit-box-inner'>
+<span class="title">Click:</span><span class="click" style="display: inline">modify here</span>
+</div>
+</div>
+
+<div class='edit-box'>
+<div class='edit-box-inner'>
+<span class="title">WithOK:</span><div class="editable" id="edit-box1">modify here<br>line1<br>line2</div>
+</div>
+</div>
+
+</div>
+<div class='clear'></div>
+<div class="footer">editable sample</div>
+</body>
+</html>
