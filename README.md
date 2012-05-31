@@ -4,4 +4,7 @@
 # first try
  jquery.jeditable.autolines - jquery + jeditable (my plugin: autolines)
 
+# Test
+  - start a simple http server by python module
+  sh run.sh
 
