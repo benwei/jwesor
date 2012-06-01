@@ -1,0 +1,109 @@
+<html>
+<head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+var mcontext;
+
+function drawSomething(context, ox, oy)
+{
+	context.fillStyle   = '#000'; // black
+	context.fillRect(0, 0, 300, 300);
+
+	context.fillStyle   = '#00f'; // blue
+	context.strokeStyle = '#f00'; // red
+	context.lineWidth   = 4;
+
+	// Draw some rectangles.
+	// Arguments: x, y, width, height
+	context.clearRect (ox+60,  oy+15,  90, 42);
+	context.fillRect  (ox+80,  oy+30, 20, 20);
+	context.fillRect  (ox+115, oy+30, 20, 20);
+
+	context.fillStyle   = '#0ff';
+	context.strokeStyle = '#00f';
+
+	context.strokeRect(ox+0,   oy+60, 150, 50);
+	context.strokeRect(ox+60,  oy+15,  90, 42);
+	context.fillRect  (ox+10,  oy+30, 30, 40);
+
+	context.fillStyle   = '#00f';
+	context.strokeStyle = '#f00';
+	context.lineWidth   = 4;
+
+	// Draw a line, then a Bèzier curve.
+	context.beginPath();
+	context.moveTo(ox+40, oy+120);
+	context.lineTo(ox+120,oy+120);
+	context.moveTo(ox+150,oy+100);
+	// Arguments: cp1x, cp1y, cp2x, cp2y, x, y
+	// cp = control point.
+	context.bezierCurveTo(210, 30, 250, 160, 300, 120);
+	context.stroke();
+	context.closePath();
+
+	context.strokeStyle = '#0D0';
+	// Draw a circle using the arc function.
+	context.beginPath();
+
+	// Arguments: x, y, radius, start angle, end angle, anticlockwise
+	context.arc(ox+120, oy+115, 30, 0, 360, false);
+	context.arc(ox+120, oy+115, 10, 0, 360, false);
+	context.stroke();
+	context.closePath();
+
+	context.beginPath();
+	context.arc(ox+30, oy+115, 30, 0, 360, false);
+	context.arc(ox+30, oy+115, 10, 0, 360, false);
+	context.stroke();
+	context.closePath();
+}
+
+var ox = 40, oy = 10;
+function animate()
+{
+	ox -=3;
+	if (ox < -160)
+		return;
+
+	setTimeout(function () {
+	    drawSomething(mcontext, ox, oy);
+	    animate();
+	}, 50);
+}
+
+function setupCanvasWindows(elm) {
+	var elem = document.getElementById(elm);
+	if (elem && elem.getContext) {
+		mcontext = elem.getContext('2d');
+		if (!mcontext) 
+			return;
+
+		drawSomething(mcontext, ox, oy);
+	}
+}
+
+	setupCanvasWindows('drawpanel');
+	$("#animate").click(function() {
+	animate(); });
+	$("#reset").click(function() {
+		ox = 40, oy=30;	
+		drawSomething(mcontext, ox, oy);
+	});
+});
+
+</script>
+
+</head>
+<body>
+<h1>Canvas Train Samples </h1>
+<div id="animate">animate</div>
+<br>
+<div id="reset">reset_animate</div>
+<canvas id="drawpanel" width="300" height="200">
+Fallback content, in case the browser does not support Canvas.
+</canvas>
+
+</body>
+</html>
