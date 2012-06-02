@@ -1,15 +1,39 @@
 <html>
 <head>
+<style type="text/css">
+.clear {
+ clear: both;
+}
+
+.jw-button {
+ float: left;
+ margin: 0 5px;
+ cursor: pointer;
+ border: 1px solid #ccc;
+ padding: 5px;
+}
+
+.pannel {
+  width:80%;
+}
+
+.splitor {
+ border: 1px dotted #ccc;
+ width: 90%;
+ margin: 5px;
+}
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function() {
 var mcontext;
+var width = 600, height=600
 
 function drawSomething(context, ox, oy)
 {
 	context.fillStyle   = '#000'; // black
-	context.fillRect(0, 0, 300, 300);
+	context.fillRect(0, 0, width, height);
 
 	context.fillStyle   = '#00f'; // blue
 	context.strokeStyle = '#f00'; // red
@@ -39,7 +63,7 @@ function drawSomething(context, ox, oy)
 	context.moveTo(ox+150,oy+100);
 	// Arguments: cp1x, cp1y, cp2x, cp2y, x, y
 	// cp = control point.
-	context.bezierCurveTo(210, 30, 250, 160, 300, 120);
+	context.bezierCurveTo(210, 30, 250, 160, 600, 120);
 	context.stroke();
 	context.closePath();
 
@@ -60,11 +84,13 @@ function drawSomething(context, ox, oy)
 	context.closePath();
 }
 
-var ox = 40, oy = 10;
+var train_long = 200;
+var ox = width - train_long, oy = 0;
 function animate()
 {
 	ox -=3;
-	if (ox < -160)
+        oy +=1;
+	if (ox < 50 || oy > height/2)
 		return;
 
 	setTimeout(function () {
@@ -85,10 +111,13 @@ function setupCanvasWindows(elm) {
 }
 
 	setupCanvasWindows('drawpanel');
+	$("#drawpanel").width(width);
+	$("#drawpanel").height(height);
+
 	$("#animate").click(function() {
 	animate(); });
 	$("#reset").click(function() {
-		ox = 40, oy=30;	
+		ox = 400, oy=30;	
 		drawSomething(mcontext, ox, oy);
 	});
 });
@@ -98,12 +127,17 @@ function setupCanvasWindows(elm) {
 </head>
 <body>
 <h1>Canvas Train Samples </h1>
-<div id="animate">animate</div>
+<div>
+<div id="animate" class="jw-button">animate</div>
+<div id="reset" class="jw-button">reset_animate</div>
+<div class="clear"></div>
+</div>
+<div class="splitor"></div>
 <br>
-<div id="reset">reset_animate</div>
-<canvas id="drawpanel" width="300" height="200">
+<div class="pannel">
+<canvas id="drawpanel" width="600" height="300">
 Fallback content, in case the browser does not support Canvas.
-</canvas>
+</canvas></div>
 
 </body>
 </html>
