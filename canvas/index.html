@@ -11,15 +11,21 @@ var width = 600, height=600
 
 function drawSomething(context, ox, oy)
 {
-	context.fillStyle   = '#000'; // black
+	context.fillStyle   = '#000'; 
 	context.fillRect(0, 0, width, height);
 
-	context.fillStyle   = '#00f'; // blue
-	context.strokeStyle = '#f00'; // red
+	context.fillStyle   = '#00f';
+	context.lineWidth   = 8;
+	context.strokeStyle = '#090';
+
+	context.beginPath();
+	context.moveTo(0,250);
+	context.bezierCurveTo(210, 30, 250, 160, 600, 120);
+	context.stroke();
+	context.closePath();
+	context.strokeStyle = '#f00';
 	context.lineWidth   = 4;
 
-	// Draw some rectangles.
-	// Arguments: x, y, width, height
 	context.clearRect (ox+60,  oy+15,  90, 42);
 	context.fillRect  (ox+80,  oy+30, 20, 20);
 	context.fillRect  (ox+115, oy+30, 20, 20);
@@ -35,22 +41,15 @@ function drawSomething(context, ox, oy)
 	context.strokeStyle = '#f00';
 	context.lineWidth   = 4;
 
-	// Draw a line, then a Bèzier curve.
 	context.beginPath();
 	context.moveTo(ox+40, oy+120);
 	context.lineTo(ox+120,oy+120);
-	context.moveTo(ox+150,oy+100);
-	// Arguments: cp1x, cp1y, cp2x, cp2y, x, y
-	// cp = control point.
-	context.bezierCurveTo(210, 30, 250, 160, 600, 120);
 	context.stroke();
 	context.closePath();
 
 	context.strokeStyle = '#0D0';
-	// Draw a circle using the arc function.
 	context.beginPath();
 
-	// Arguments: x, y, radius, start angle, end angle, anticlockwise
 	context.arc(ox+120, oy+115, 30, 0, 360, false);
 	context.arc(ox+120, oy+115, 10, 0, 360, false);
 	context.stroke();
