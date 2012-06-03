@@ -1,0 +1,51 @@
+
+.clear {
+ clear: both;
+}
+
+.jw-button {
+ float: left;
+ margin: 0 5px;
+ cursor: pointer;
+ border: 1px solid #ccc;
+ padding: 5px;
+ background-color: #fffacd;
+}
+
+.title {
+  text-align: center;
+  width: 600px;
+}
+.title div h1 {
+ font-size:10px; font-weight:normal;
+}
+
+.toolbar-inner div:hover { 
+border:1px dotted #000;
+background-color: #fff0cd;
+}
+
+.jw-button div:hover h1 { font-size:32px; font-weight:bold; color:#cc0000; }
+
+.pannel {
+  width:80%;
+}
+
+.splitor {
+ border: 1px dotted #ccc;
+ width: 90%;
+ margin: 5px;
+}
+
+.toolbar {
+  border: 1px dotted #ccc;
+  width: 600px;
+  height: 34px;
+  position: relative;
+  margin: 0 auto;
+  background-color: #eee;
+}
+.toolbar-inner {
+  width: 160px;
+  margin: 0 auto;
+}
